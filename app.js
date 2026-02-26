@@ -126,7 +126,7 @@ function initRegistrationForm() {
   const form = document.getElementById('registrationForm');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Gather form data
@@ -175,42 +175,41 @@ function initRegistrationForm() {
     submitArrow.style.display = 'none';
     submitSpinner.style.display = 'inline';
 
-    // Save to localStorage (simulating database)
-    setTimeout(() => {
-      try {
-        const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
+    // Save to server
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
 
-        // Check for duplicate email
-        if (registrations.some(r => r.email === formData.email)) {
-          showToast('This email is already registered.', 'error');
-          submitBtn.disabled = false;
-          submitText.textContent = 'Register Now';
-          submitArrow.style.display = 'inline';
-          submitSpinner.style.display = 'none';
-          return;
-        }
-
-        registrations.push(formData);
-        localStorage.setItem('corsit_registrations', JSON.stringify(registrations));
-
-        // Show success modal
-        const modal = document.getElementById('successModal');
-        if (modal) {
-          modal.style.display = 'flex';
-        }
-
-        // Reset form
-        form.reset();
-      } catch (err) {
-        showToast('Something went wrong. Please try again.', 'error');
+      if (!response.ok) {
+        showToast(result.error || 'Registration failed.', 'error');
+        submitBtn.disabled = false;
+        submitText.textContent = 'Register Now';
+        submitArrow.style.display = 'inline';
+        submitSpinner.style.display = 'none';
+        return;
       }
 
-      // Reset button
-      submitBtn.disabled = false;
-      submitText.textContent = 'Register Now';
-      submitArrow.style.display = 'inline';
-      submitSpinner.style.display = 'none';
-    }, 1200); // Simulate network delay
+      // Show success modal
+      const modal = document.getElementById('successModal');
+      if (modal) {
+        modal.style.display = 'flex';
+      }
+
+      // Reset form
+      form.reset();
+    } catch (err) {
+      showToast('Network error. Please try again.', 'error');
+    }
+
+    // Reset button
+    submitBtn.disabled = false;
+    submitText.textContent = 'Register Now';
+    submitArrow.style.display = 'inline';
+    submitSpinner.style.display = 'none';
   });
 }
 
@@ -234,25 +233,43 @@ function initAdminPanel() {
   if (!loginForm) return;
 
   // Check existing session
-  if (sessionStorage.getItem('corsit_admin') === 'true') {
+  if (sessionStorage.getItem('corsit_admin_token')) {
     adminLoggedIn = true;
     showDashboard();
   }
 
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const username = document.getElementById('admin-user').value.trim();
     const password = document.getElementById('admin-pass').value;
 
-    if (username === ADMIN_CREDENTIALS.username &&
-      password === ADMIN_CREDENTIALS.password) {
-      adminLoggedIn = true;
-      sessionStorage.setItem('corsit_admin', 'true');
-      showDashboard();
-      showToast('Welcome, Admin!', 'success');
-    } else {
-      showToast('Invalid credentials. Please try again.', 'error');
+    try {
+      const submitBtn = loginForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+
+      if (res.ok) {
+        adminLoggedIn = true;
+        sessionStorage.setItem('corsit_admin_token', data.token);
+        showDashboard();
+        showToast(data.message || 'Welcome, Admin!', 'success');
+      } else {
+        showToast(data.error || 'Invalid credentials.', 'error');
+      }
+    } catch (err) {
+      showToast('Login error. Is the server running?', 'error');
     }
   });
 }
@@ -269,7 +286,7 @@ function showDashboard() {
 
 function adminLogout() {
   adminLoggedIn = false;
-  sessionStorage.removeItem('corsit_admin');
+  sessionStorage.removeItem('corsit_admin_token');
 
   const loginView = document.getElementById('adminLogin');
   const dashView = document.getElementById('adminDashboard');
@@ -284,10 +301,26 @@ function adminLogout() {
   showToast('Logged out successfully.', 'success');
 }
 
-function loadRegistrations() {
-  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
-  renderRegistrations(registrations);
-  updateStats(registrations);
+let registrationsCache = [];
+
+async function loadRegistrations() {
+  const token = sessionStorage.getItem('corsit_admin_token');
+  if (!token) return adminLogout();
+
+  try {
+    const res = await fetch('/api/registrations', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (res.status === 401 || res.status === 403) {
+      return adminLogout();
+    }
+    const data = await res.json();
+    registrationsCache = data;
+    renderRegistrations(registrationsCache);
+    updateStats(registrationsCache);
+  } catch (err) {
+    showToast('Failed to load registrations', 'error');
+  }
 }
 
 function renderRegistrations(data) {
@@ -327,8 +360,8 @@ function renderRegistrations(data) {
         <td style="font-size:0.8rem;">${formattedDate}</td>
         <td>
           <div style="display:flex; gap:0.5rem;">
-            <button class="btn btn-secondary btn-sm" onclick="viewDetail(${reg.id})" style="padding:0.35rem 0.75rem; font-size:0.75rem;">View</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteRegistration(${reg.id})" style="padding:0.35rem 0.75rem; font-size:0.75rem;">Delete</button>
+            <button class="btn btn-secondary btn-sm" onclick="viewDetail('${reg.id}')" style="padding:0.35rem 0.75rem; font-size:0.75rem;">View</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteRegistration('${reg.id}')" style="padding:0.35rem 0.75rem; font-size:0.75rem;">Delete</button>
           </div>
         </td>
       </tr>
@@ -363,14 +396,13 @@ function updateStats(registrations) {
 
 function filterRegistrations() {
   const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
 
   if (!query) {
-    renderRegistrations(registrations);
+    renderRegistrations(registrationsCache);
     return;
   }
 
-  const filtered = registrations.filter(r =>
+  const filtered = registrationsCache.filter(r =>
     r.name.toLowerCase().includes(query) ||
     r.email.toLowerCase().includes(query)
   );
@@ -379,8 +411,7 @@ function filterRegistrations() {
 }
 
 function viewDetail(id) {
-  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
-  const reg = registrations.find(r => r.id === id);
+  const reg = registrationsCache.find(r => r.id === id);
 
   if (!reg) return;
 
@@ -447,19 +478,30 @@ function closeDetailModal() {
   if (modal) modal.style.display = 'none';
 }
 
-function deleteRegistration(id) {
+async function deleteRegistration(id) {
   if (!confirm('Are you sure you want to delete this registration?')) return;
 
-  let registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
-  registrations = registrations.filter(r => r.id !== id);
-  localStorage.setItem('corsit_registrations', JSON.stringify(registrations));
+  const token = sessionStorage.getItem('corsit_admin_token');
+  try {
+    const res = await fetch(`/api/registrations/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
 
-  loadRegistrations();
-  showToast('Registration deleted.', 'success');
+    if (res.ok) {
+      loadRegistrations();
+      showToast('Registration deleted.', 'success');
+    } else {
+      const data = await res.json();
+      showToast(data.error || 'Failed to delete', 'error');
+    }
+  } catch (err) {
+    showToast('Failed to delete registration', 'error');
+  }
 }
 
 function exportCSV() {
-  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
+  const registrations = registrationsCache;
 
   if (registrations.length === 0) {
     showToast('No data to export.', 'error');
