@@ -1,0 +1,27 @@
+{
+  "name": "registration_form",
+  "version": "1.0.0",
+  "description": "An automated registration platform designed to streamline participant sign-ups and data management for robotics workshops. Built with a focus on user experience, it handles secure intake and keeps workshop logistics organized in one place.",
+  "main": "app.js",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css",
+    "watch:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mithun-r13/Registration_Form.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mithun-r13/Registration_Form/issues"
+  },
+  "homepage": "https://github.com/mithun-r13/Registration_Form#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "tailwindcss": "^4.2.1"
+  }
+}
