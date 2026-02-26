@@ -7,8 +7,27 @@
     <meta name="description" content="CORSIT Admin Panel — Manage robotics workshop registrations.">
     <title>Admin Panel — CORSIT</title>
 
-    <!-- Tailwind CSS (compiled) -->
-    <link rel="stylesheet" href="./dist/output.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'corsit-bg': '#0B0B0D',
+                        'corsit-card': '#111114',
+                        'corsit-card-end': '#1A1A1F',
+                        'corsit-text': '#F5F5F7',
+                        'corsit-muted': '#A1A1AA',
+                        'corsit-btn-sec': '#1C1C21',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
@@ -25,7 +44,7 @@
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
             <a href="index.html" class="navbar-logo">
-                <div class="logo-icon">C</div>
+                <img src="corsit-logo.png" alt="CORSIT Logo" class="logo-icon">
                 <span class="logo-text">CORSIT</span>
             </a>
 
@@ -206,7 +225,7 @@
         <div class="footer-inner">
             <div>
                 <a href="index.html" class="navbar-logo" style="display: inline-flex; margin-bottom: 0.5rem;">
-                    <div class="logo-icon" style="width:28px; height:28px; font-size:0.7rem;">C</div>
+                    <img src="corsit-logo.png" alt="CORSIT Logo" class="logo-icon" style="width:28px; height:28px;">
                     <span class="logo-text" style="font-size:1rem;">CORSIT</span>
                 </a>
                 <p style="color: var(--text-secondary); font-size: 0.8rem;">© 2026 CORSIT Robotics Club. All rights
