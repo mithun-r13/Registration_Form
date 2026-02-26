@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Snarex — AI-Powered Workshop. Join the most transformative AI workshop of the year. Learn, connect, and innovate.">
+  <title>Snarex — Transcend Ordinary Intelligence</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'snarex-bg': '#0B0B0D',
+            'snarex-card': '#111114',
+            'snarex-card-end': '#1A1A1F',
+            'snarex-text': '#F5F5F7',
+            'snarex-muted': '#A1A1AA',
+            'snarex-btn-sec': '#1C1C21',
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter">
+
+  <!-- Radial Gradient Background Glow -->
+  <div class="bg-glow"></div>
+
+  <!-- ================================================
+       NAVBAR — Glassmorphism Sticky Navigation
+       ================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-icon">S</div>
+        <span class="logo-text">Snarex</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="navbar-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#why-attend">Why Attend</a></li>
+        <li><a href="register.html" class="btn btn-primary btn-sm">Sign Up</a></li>
+      </ul>
+
+      <!-- Hamburger Menu -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================================================
+       HERO SECTION — Split Layout
+       ================================================ -->
+  <section class="hero" id="home">
+    <div class="hero-grid">
+
+      <!-- Left Side — Content -->
+      <div class="hero-content">
+        <!-- Pill Badge -->
+        <div class="pill-badge animate-on-scroll stagger-1">
+          <span class="dot"></span>
+          AI that evolves — Smarter. Faster. Adaptive.
+        </div>
+
+        <!-- Heading -->
+        <h1 class="animate-on-scroll stagger-2">
+          Transcend<br>Ordinary<br>Intelligence
+        </h1>
+
+        <!-- Subtext -->
+        <p class="animate-on-scroll stagger-3">
+          Join the most transformative AI workshop of the year.
+          Discover cutting-edge methodologies, collaborate with industry leaders,
+          and unlock the future of adaptive intelligence systems.
+        </p>
+
+        <!-- Event Details -->
+        <div class="animate-on-scroll stagger-4" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+            <span>📅 March 15, 2026</span>
+            <span>🕐 10:00 AM IST</span>
+            <span>📍 Tech Arena, Bangalore</span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta animate-on-scroll stagger-5">
+          <a href="register.html" class="btn btn-primary">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#about" class="btn btn-secondary">See How It Works</a>
+        </div>
+      </div>
+
+      <!-- Right Side — Visual -->
+      <div class="hero-visual animate-on-scroll stagger-6">
+        <div class="hero-image-container">
+          <!-- Spotlight Glow -->
+          <div class="hero-spotlight"></div>
+
+          <!-- Abstract CSS 3D Orb -->
+          <div class="hero-orb"></div>
+
+          <!-- Floating Stats Card -->
+          <div class="floating-card">
+            <div class="floating-card-icon">👥</div>
+            <div>
+              <div class="floating-card-number">120M+</div>
+              <div class="floating-card-label">Happy Users</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================
+       COUNTDOWN TIMER
+       ================================================ -->
+  <section class="section" id="countdown-section">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2>Event Starts In</h2>
+        <p>Mark your calendar. The countdown to transformation has begun.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="countdown-wrapper animate-on-scroll stagger-2" id="countdown">
+        <div class="countdown-item">
+          <div class="countdown-value" id="countdown-days">00</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value" id="countdown-hours">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value" id="countdown-minutes">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-value" id="countdown-seconds">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       ABOUT / WORKSHOP DESCRIPTION
+       ================================================ -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2>About The Workshop</h2>
+        <p>An immersive, hands-on experience designed to push the boundaries of what you know about AI.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card animate-on-scroll stagger-1">
+          <div class="card-icon">🧪</div>
+          <h3>Hands-On Labs</h3>
+          <p>
+            Dive deep into real-world AI scenarios. Build, train, and deploy
+            machine learning models with guidance from leading researchers
+            and practitioners in the field.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card animate-on-scroll stagger-2">
+          <div class="card-icon">🔬</div>
+          <h3>Cutting-Edge Research</h3>
+          <p>
+            Explore the latest advancements in neural architectures,
+            reinforcement learning, and generative AI. Stay ahead of
+            the curve with insights that matter.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card animate-on-scroll stagger-3">
+          <div class="card-icon">🤝</div>
+          <h3>Network & Collaborate</h3>
+          <p>
+            Connect with 500+ developers, researchers, and tech leaders.
+            Form lasting professional relationships and discover
+            collaboration opportunities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FEATURES
+       ================================================ -->
+  <section class="section" id="features">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2>What You'll Experience</h2>
+        <p>Every detail is designed to deliver maximum impact and learning.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card animate-on-scroll stagger-1">
+          <div class="card-icon">⚡</div>
+          <h3>Live Coding Sessions</h3>
+          <p>Watch experts code in real-time and follow along with interactive notebooks and environments.</p>
+        </div>
+
+        <div class="card animate-on-scroll stagger-2">
+          <div class="card-icon">📊</div>
+          <h3>Data-Driven Insights</h3>
+          <p>Learn to extract meaningful patterns from complex datasets using state-of-the-art tools.</p>
+        </div>
+
+        <div class="card animate-on-scroll stagger-3">
+          <div class="card-icon">🏆</div>
+          <h3>Certification</h3>
+          <p>Receive a verified certificate of completion recognized across the industry for your portfolio.</p>
+        </div>
+
+        <div class="card animate-on-scroll stagger-4">
+          <div class="card-icon">🎯</div>
+          <h3>Project Showcase</h3>
+          <p>Present your capstone project to a panel of industry judges and win exciting prizes.</p>
+        </div>
+
+        <div class="card animate-on-scroll stagger-5">
+          <div class="card-icon">📚</div>
+          <h3>Resource Library</h3>
+          <p>Get lifetime access to workshop materials, recordings, code repositories, and learning resources.</p>
+        </div>
+
+        <div class="card animate-on-scroll stagger-6">
+          <div class="card-icon">💡</div>
+          <h3>Innovation Lab</h3>
+          <p>Work with GPUs, cloud infrastructure, and cutting-edge frameworks in a dedicated lab environment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       SPEAKERS
+       ================================================ -->
+  <section class="section" id="speakers">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2>Meet The Speakers</h2>
+        <p>Learn from the minds shaping the future of artificial intelligence.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card speaker-card animate-on-scroll stagger-1">
+          <div class="speaker-avatar">🧠</div>
+          <div class="speaker-name">Dr. Arjun Mehta</div>
+          <div class="speaker-role">Chief AI Scientist, NeuralForge</div>
+          <p style="margin-top: 0.75rem; color: var(--text-secondary); font-size: 0.9rem;">
+            Pioneer in adaptive neural networks with 15+ years in deep learning research.
+          </p>
+        </div>
+
+        <div class="card speaker-card animate-on-scroll stagger-2">
+          <div class="speaker-avatar">🔮</div>
+          <div class="speaker-name">Priya Sharma</div>
+          <div class="speaker-role">VP of Engineering, DataSphere</div>
+          <p style="margin-top: 0.75rem; color: var(--text-secondary); font-size: 0.9rem;">
+            Leading expert in scalable ML systems and real-time data pipelines.
+          </p>
+        </div>
+
+        <div class="card speaker-card animate-on-scroll stagger-3">
+          <div class="speaker-avatar">🚀</div>
+          <div class="speaker-name">Rahul Verma</div>
+          <div class="speaker-role">CTO, AutomateX Labs</div>
+          <p style="margin-top: 0.75rem; color: var(--text-secondary); font-size: 0.9rem;">
+            Visionary technologist specializing in autonomous systems and robotics AI.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       WHY ATTEND
+       ================================================ -->
+  <section class="section" id="why-attend">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2>Why You Should Attend</h2>
+        <p>This isn't just another workshop. It's a launchpad for your AI journey.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="reasons-list">
+        <div class="reason-item animate-on-scroll stagger-1">
+          <div class="reason-icon">🎓</div>
+          <div>
+            <h4>Industry-Ready Skills</h4>
+            <p>Walk away with practical skills you can apply at work from day one.</p>
+          </div>
+        </div>
+
+        <div class="reason-item animate-on-scroll stagger-2">
+          <div class="reason-icon">🌐</div>
+          <div>
+            <h4>Global Network</h4>
+            <p>Connect with professionals from 20+ countries and top-tier companies.</p>
+          </div>
+        </div>
+
+        <div class="reason-item animate-on-scroll stagger-3">
+          <div class="reason-icon">📈</div>
+          <div>
+            <h4>Career Acceleration</h4>
+            <p>93% of past attendees reported career advancement within 6 months.</p>
+          </div>
+        </div>
+
+        <div class="reason-item animate-on-scroll stagger-4">
+          <div class="reason-icon">🛠</div>
+          <div>
+            <h4>Real-World Projects</h4>
+            <p>Build portfolio-worthy projects using production-grade tools and frameworks.</p>
+          </div>
+        </div>
+
+        <div class="reason-item animate-on-scroll stagger-5">
+          <div class="reason-icon">🏅</div>
+          <div>
+            <h4>Exclusive Swag & Prizes</h4>
+            <p>Top performers win cloud credits, course subscriptions, and premium dev tools.</p>
+          </div>
+        </div>
+
+        <div class="reason-item animate-on-scroll stagger-6">
+          <div class="reason-icon">♻️</div>
+          <div>
+            <h4>Lifetime Access</h4>
+            <p>All recordings, notes, and resources are yours forever. Never stop learning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       REGISTER CTA BANNER
+       ================================================ -->
+  <section class="section" id="register-cta">
+    <div class="section-inner">
+      <div class="cta-banner animate-on-scroll">
+        <h2>Ready to Transform Your Skills?</h2>
+        <p>Secure your seat now. Limited spots available for this exclusive AI workshop experience.</p>
+        <a href="register.html" class="btn btn-primary">
+          Register Now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FOOTER
+       ================================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="index.html" class="navbar-logo" style="display: inline-flex; margin-bottom: 0.5rem;">
+          <div class="logo-icon" style="width:28px; height:28px; font-size:0.7rem;">S</div>
+          <span class="logo-text" style="font-size:1rem;">Snarex</span>
+        </a>
+        <p style="color: var(--text-secondary); font-size: 0.8rem;">© 2026 Snarex. All rights reserved.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+
+</html>

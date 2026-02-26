@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for the Snarex AI Workshop — Secure your spot today.">
+    <title>Register — Snarex</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'snarex-bg': '#0B0B0D',
+                        'snarex-card': '#111114',
+                        'snarex-card-end': '#1A1A1F',
+                        'snarex-text': '#F5F5F7',
+                        'snarex-muted': '#A1A1AA',
+                        'snarex-btn-sec': '#1C1C21',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter">
+
+    <!-- Radial Gradient Background Glow -->
+    <div class="bg-glow"></div>
+
+    <!-- ================================================
+       NAVBAR
+       ================================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">S</div>
+                <span class="logo-text">Snarex</span>
+            </a>
+
+            <ul class="navbar-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#speakers">Speakers</a></li>
+                <li><a href="index.html#why-attend">Why Attend</a></li>
+                <li><a href="register.html" class="btn btn-primary btn-sm active">Sign Up</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ================================================
+       REGISTRATION FORM SECTION
+       ================================================ -->
+    <section class="section" style="padding-top: 120px; min-height: 100vh;">
+        <div class="section-inner">
+
+            <!-- Header -->
+            <div class="section-header animate-on-scroll">
+                <div class="pill-badge" style="margin: 0 auto 1.5rem;">
+                    <span class="dot"></span>
+                    Limited Seats Available
+                </div>
+                <h2>Register for the Workshop</h2>
+                <p>Fill in your details below to secure your spot at the most transformative AI event of the year.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Form -->
+            <div class="form-container animate-on-scroll stagger-2">
+                <form id="registrationForm" novalidate>
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <!-- Email & Phone -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-email">Email Address</label>
+                            <input type="email" id="reg-email" name="email" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-phone">Phone Number</label>
+                            <input type="tel" id="reg-phone" name="phone" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+
+                    <!-- College -->
+                    <div class="form-group">
+                        <label for="reg-college">College / University</label>
+                        <input type="text" id="reg-college" name="college" placeholder="Your college name" required>
+                    </div>
+
+                    <!-- Branch & Year -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-branch">Branch / Department</label>
+                            <select id="reg-branch" name="branch" required>
+                                <option value="" disabled selected>Select your branch</option>
+                                <option value="CSE">Computer Science & Engineering</option>
+                                <option value="ISE">Information Science & Engineering</option>
+                                <option value="ECE">Electronics & Communication</option>
+                                <option value="EEE">Electrical & Electronics</option>
+                                <option value="ME">Mechanical Engineering</option>
+                                <option value="CE">Civil Engineering</option>
+                                <option value="AI/ML">AI & Machine Learning</option>
+                                <option value="DS">Data Science</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-year">Year of Study</label>
+                            <select id="reg-year" name="year" required>
+                                <option value="" disabled selected>Select year</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                                <option value="PG">Post Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Reason for Attending -->
+                    <div class="form-group">
+                        <label for="reg-interest">Why do you want to attend?</label>
+                        <textarea id="reg-interest" name="interest"
+                            placeholder="Tell us what excites you about this workshop..." rows="4" required></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;"
+                        id="submitBtn">
+                        <span id="submitText">Register Now</span>
+                        <svg id="submitArrow" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <!-- Spinner (hidden by default) -->
+                        <svg id="submitSpinner" style="display:none;" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                            <path
+                                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83">
+                                <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12"
+                                    dur="1s" repeatCount="indefinite" />
+                            </path>
+                        </svg>
+                    </button>
+
+                    <p
+                        style="text-align: center; margin-top: 1.25rem; font-size: 0.8rem; color: var(--text-secondary);">
+                        By registering, you agree to receive event updates via email.
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================================
+       SUCCESS MODAL (Hidden)
+       ================================================ -->
+    <div id="successModal"
+        style="display:none; position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+        <div
+            style="background: linear-gradient(145deg, var(--bg-secondary-start), var(--bg-secondary-end)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 3rem 2.5rem; max-width: 440px; text-align: center; animation: fadeInUp 500ms var(--transition-smooth);">
+            <div
+                style="width:64px; height:64px; border-radius:50%; background:rgba(107,255,107,0.1); border:2px solid rgba(107,255,107,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem; font-size:1.8rem;">
+                ✓
+            </div>
+            <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.75rem;">Registration Successful!</h3>
+            <p style="color:var(--text-secondary); margin-bottom:0.5rem;">Thank you for registering for the Snarex AI
+                Workshop.</p>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:2rem;">A confirmation email has been
+                sent to your inbox.</p>
+            <a href="index.html" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ================================================
+       FOOTER
+       ================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <a href="index.html" class="navbar-logo" style="display: inline-flex; margin-bottom: 0.5rem;">
+                    <div class="logo-icon" style="width:28px; height:28px; font-size:0.7rem;">S</div>
+                    <span class="logo-text" style="font-size:1rem;">Snarex</span>
+                </a>
+                <p style="color: var(--text-secondary); font-size: 0.8rem;">© 2026 Snarex. All rights reserved.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Snarex Admin Panel — Manage workshop registrations.">
+    <title>Admin Panel — Snarex</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'snarex-bg': '#0B0B0D',
+                        'snarex-card': '#111114',
+                        'snarex-card-end': '#1A1A1F',
+                        'snarex-text': '#F5F5F7',
+                        'snarex-muted': '#A1A1AA',
+                        'snarex-btn-sec': '#1C1C21',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter">
+
+    <!-- Radial Gradient Background Glow -->
+    <div class="bg-glow"></div>
+
+    <!-- ================================================
+       NAVBAR
+       ================================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <div class="logo-icon">S</div>
+                <span class="logo-text">Snarex</span>
+            </a>
+
+            <ul class="navbar-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ================================================
+       ADMIN LOGIN VIEW
+       ================================================ -->
+    <div id="adminLogin" class="admin-login-container">
+        <div class="form-container animate-on-scroll" style="max-width: 420px; width: 100%;">
+
+            <!-- Lock Icon -->
+            <div style="text-align:center; margin-bottom: 2rem;">
+                <div
+                    style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid var(--border-soft); display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; font-size:1.5rem;">
+                    🔒
+                </div>
+                <h2 style="font-size:1.5rem; font-weight:700;">Admin Access</h2>
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.5rem;">Enter your credentials to
+                    continue</p>
+            </div>
+
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="admin-user">Username</label>
+                    <input type="text" id="admin-user" name="username" placeholder="admin" required
+                        autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-pass">Password</label>
+                    <input type="password" id="admin-pass" name="password" placeholder="••••••••" required
+                        autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; padding:0.85rem; font-size:0.95rem;">
+                    Login
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </form>
+
+            <p style="text-align:center; margin-top:1.5rem; font-size:0.8rem; color:var(--text-secondary);">
+                Default: admin / admin123
+            </p>
+        </div>
+    </div>
+
+    <!-- ================================================
+       ADMIN DASHBOARD VIEW (Hidden by default)
+       ================================================ -->
+    <div id="adminDashboard" style="display:none;" class="section" style="padding-top:120px; min-height:100vh;">
+        <div style="max-width:1280px; margin:0 auto; padding:6rem 2rem 3rem;">
+
+            <!-- Dashboard Header -->
+            <div
+                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+                <div>
+                    <h1 style="font-size:1.8rem; font-weight:800; letter-spacing:-0.02em;">Registrations</h1>
+                    <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.25rem;">
+                        Manage all workshop registrations
+                    </p>
+                </div>
+
+                <div style="display:flex; gap:0.75rem; align-items:center;">
+                    <span id="totalCount" style="color:var(--text-secondary); font-size:0.85rem;">0 records</span>
+                    <button class="btn btn-secondary btn-sm" onclick="exportCSV()">
+                        📥 Export CSV
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="adminLogout()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div
+                style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin-bottom:2rem;">
+                <div class="card" style="padding:1.25rem;">
+                    <div
+                        style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem;">
+                        Total Registrations</div>
+                    <div id="stat-total" style="font-size:1.8rem; font-weight:800;">0</div>
+                </div>
+                <div class="card" style="padding:1.25rem;">
+                    <div
+                        style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem;">
+                        Today</div>
+                    <div id="stat-today" style="font-size:1.8rem; font-weight:800;">0</div>
+                </div>
+                <div class="card" style="padding:1.25rem;">
+                    <div
+                        style="font-size:0.8rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem;">
+                        Top Branch</div>
+                    <div id="stat-branch" style="font-size:1.8rem; font-weight:800;">—</div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by name or email..."
+                    oninput="filterRegistrations()">
+            </div>
+
+            <!-- Registrations Table -->
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>College</th>
+                            <th>Branch</th>
+                            <th>Year</th>
+                            <th>Registered</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registrationsBody">
+                        <!-- Rows inserted dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState"
+                style="display:none; text-align:center; padding:4rem 2rem; color:var(--text-secondary);">
+                <div style="font-size:3rem; margin-bottom:1rem;">📭</div>
+                <h3 style="font-size:1.2rem; font-weight:600; margin-bottom:0.5rem; color:var(--text-primary);">No
+                    registrations yet</h3>
+                <p>Registrations will appear here once people sign up.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="detailModal"
+        style="display:none; position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+        <div
+            style="background: linear-gradient(145deg, var(--bg-secondary-start), var(--bg-secondary-end)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 520px; width:90%;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3 style="font-size:1.25rem; font-weight:700;">Registration Details</h3>
+                <button onclick="closeDetailModal()"
+                    style="background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:1.5rem; line-height:1;">×</button>
+            </div>
+            <div id="detailContent">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ================================================
+       FOOTER
+       ================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <a href="index.html" class="navbar-logo" style="display: inline-flex; margin-bottom: 0.5rem;">
+                    <div class="logo-icon" style="width:28px; height:28px; font-size:0.7rem;">S</div>
+                    <span class="logo-text" style="font-size:1rem;">Snarex</span>
+                </a>
+                <p style="color: var(--text-secondary); font-size: 0.8rem;">© 2026 Snarex. All rights reserved.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
