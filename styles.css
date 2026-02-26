@@ -1,6 +1,6 @@
 /* ============================================
-   SNAREX — Custom Styles & Animations
-   Monochrome Premium SaaS Design System
+   CORSIT — Custom Styles & Animations
+   Monochrome Premium Robotics Design System
    ============================================ */
 
 /* ---------- Google Fonts ---------- */
@@ -108,14 +108,9 @@ body::before {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #333 0%, #555 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.85rem;
-  color: var(--text-primary);
+  object-fit: cover;
   border: 1px solid var(--border-soft);
+  background: transparent;
 }
 
 .logo-text {
@@ -181,8 +176,8 @@ body::before {
   border: none;
   text-decoration: none;
   transition: transform 250ms var(--transition-smooth),
-              box-shadow 250ms var(--transition-smooth),
-              background 250ms var(--transition-smooth);
+    box-shadow 250ms var(--transition-smooth),
+    background 250ms var(--transition-smooth);
 }
 
 .btn:hover {
@@ -196,7 +191,7 @@ body::before {
 
 .btn-primary:hover {
   box-shadow: 0 0 24px rgba(255, 255, 255, 0.15),
-              0 4px 16px rgba(255, 255, 255, 0.08);
+    0 4px 16px rgba(255, 255, 255, 0.08);
 }
 
 .btn-secondary {
@@ -250,8 +245,15 @@ body::before {
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ---------- Hero Section ---------- */
@@ -330,7 +332,7 @@ body::before {
   position: absolute;
   inset: 15%;
   border-radius: 50% 40% 55% 45% / 45% 55% 40% 60%;
-  background: linear-gradient(225deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  background: linear-gradient(225deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
   animation: morph-inner 6s ease-in-out infinite reverse;
 }
 
@@ -342,7 +344,7 @@ body::before {
   width: 40%;
   height: 35%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
   filter: blur(8px);
 }
 
@@ -353,20 +355,40 @@ body::before {
   right: -10%;
   width: 60%;
   height: 60%;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
 @keyframes morph {
-  0%, 100% { border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%; }
-  25% { border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%; }
-  50% { border-radius: 45% 55% 60% 40% / 60% 45% 55% 40%; }
-  75% { border-radius: 60% 40% 45% 55% / 45% 60% 40% 55%; }
+
+  0%,
+  100% {
+    border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%;
+  }
+
+  25% {
+    border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%;
+  }
+
+  50% {
+    border-radius: 45% 55% 60% 40% / 60% 45% 55% 40%;
+  }
+
+  75% {
+    border-radius: 60% 40% 45% 55% / 45% 60% 40% 55%;
+  }
 }
 
 @keyframes morph-inner {
-  0%, 100% { border-radius: 50% 40% 55% 45% / 45% 55% 40% 60%; }
-  50% { border-radius: 40% 55% 45% 50% / 55% 40% 60% 45%; }
+
+  0%,
+  100% {
+    border-radius: 50% 40% 55% 45% / 45% 55% 40% 60%;
+  }
+
+  50% {
+    border-radius: 40% 55% 45% 50% / 55% 40% 60% 45%;
+  }
 }
 
 /* ---------- Floating Stats Card ---------- */
@@ -409,8 +431,15 @@ body::before {
 }
 
 @keyframes floating {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 /* ---------- Fade-in / Stagger Animations ---------- */
@@ -418,7 +447,7 @@ body::before {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 700ms var(--transition-smooth),
-              transform 700ms var(--transition-smooth);
+    transform 700ms var(--transition-smooth);
 }
 
 .animate-on-scroll.is-visible {
@@ -427,12 +456,29 @@ body::before {
 }
 
 /* Stagger delays for hero children */
-.stagger-1 { transition-delay: 100ms; }
-.stagger-2 { transition-delay: 200ms; }
-.stagger-3 { transition-delay: 300ms; }
-.stagger-4 { transition-delay: 400ms; }
-.stagger-5 { transition-delay: 500ms; }
-.stagger-6 { transition-delay: 600ms; }
+.stagger-1 {
+  transition-delay: 100ms;
+}
+
+.stagger-2 {
+  transition-delay: 200ms;
+}
+
+.stagger-3 {
+  transition-delay: 300ms;
+}
+
+.stagger-4 {
+  transition-delay: 400ms;
+}
+
+.stagger-5 {
+  transition-delay: 500ms;
+}
+
+.stagger-6 {
+  transition-delay: 600ms;
+}
 
 /* ---------- Section Styles ---------- */
 .section {
@@ -486,8 +532,8 @@ body::before {
   border-radius: var(--radius-lg);
   padding: 2rem;
   transition: transform 300ms var(--transition-smooth),
-              box-shadow 300ms var(--transition-smooth),
-              border-color 300ms var(--transition-smooth);
+    box-shadow 300ms var(--transition-smooth),
+    border-color 300ms var(--transition-smooth);
 }
 
 .card:hover {
@@ -597,7 +643,7 @@ body::before {
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
   transition: transform 300ms var(--transition-smooth),
-              border-color 300ms var(--transition-smooth);
+    border-color 300ms var(--transition-smooth);
 }
 
 .reason-item:hover {
@@ -646,7 +692,7 @@ body::before {
   transform: translateX(-50%);
   width: 80%;
   height: 100%;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.04), transparent 70%);
   pointer-events: none;
 }
 
@@ -700,7 +746,7 @@ body::before {
   font-family: inherit;
   font-size: 0.95rem;
   transition: border-color 250ms var(--transition-smooth),
-              box-shadow 250ms var(--transition-smooth);
+    box-shadow 250ms var(--transition-smooth);
   outline: none;
 }
 
@@ -891,7 +937,7 @@ body::before {
   height: 2px;
   background: var(--text-primary);
   transition: transform 300ms var(--transition-smooth),
-              opacity 300ms var(--transition-smooth);
+    opacity 300ms var(--transition-smooth);
 }
 
 .hamburger.active span:nth-child(1) {
@@ -987,8 +1033,15 @@ body::before {
   }
 
   @keyframes floating {
-    0%, 100% { transform: translateX(-50%) translateY(0px); }
-    50% { transform: translateX(-50%) translateY(-12px); }
+
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0px);
+    }
+
+    50% {
+      transform: translateX(-50%) translateY(-12px);
+    }
   }
 
   .form-row {

@@ -1,5 +1,5 @@
 /* ============================================
-   SNAREX — Application JavaScript
+   CORSIT — Application JavaScript
    Handles: Countdown, Forms, Admin, Animations
    ============================================ */
 
@@ -144,8 +144,8 @@ function initRegistrationForm() {
 
     // Validate required fields
     if (!formData.name || !formData.email || !formData.phone ||
-        !formData.college || !formData.branch || !formData.year ||
-        !formData.interest) {
+      !formData.college || !formData.branch || !formData.year ||
+      !formData.interest) {
       showToast('Please fill in all fields.', 'error');
       return;
     }
@@ -178,7 +178,7 @@ function initRegistrationForm() {
     // Save to localStorage (simulating database)
     setTimeout(() => {
       try {
-        const registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+        const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
 
         // Check for duplicate email
         if (registrations.some(r => r.email === formData.email)) {
@@ -191,7 +191,7 @@ function initRegistrationForm() {
         }
 
         registrations.push(formData);
-        localStorage.setItem('snarex_registrations', JSON.stringify(registrations));
+        localStorage.setItem('corsit_registrations', JSON.stringify(registrations));
 
         // Show success modal
         const modal = document.getElementById('successModal');
@@ -234,7 +234,7 @@ function initAdminPanel() {
   if (!loginForm) return;
 
   // Check existing session
-  if (sessionStorage.getItem('snarex_admin') === 'true') {
+  if (sessionStorage.getItem('corsit_admin') === 'true') {
     adminLoggedIn = true;
     showDashboard();
   }
@@ -246,9 +246,9 @@ function initAdminPanel() {
     const password = document.getElementById('admin-pass').value;
 
     if (username === ADMIN_CREDENTIALS.username &&
-        password === ADMIN_CREDENTIALS.password) {
+      password === ADMIN_CREDENTIALS.password) {
       adminLoggedIn = true;
-      sessionStorage.setItem('snarex_admin', 'true');
+      sessionStorage.setItem('corsit_admin', 'true');
       showDashboard();
       showToast('Welcome, Admin!', 'success');
     } else {
@@ -269,7 +269,7 @@ function showDashboard() {
 
 function adminLogout() {
   adminLoggedIn = false;
-  sessionStorage.removeItem('snarex_admin');
+  sessionStorage.removeItem('corsit_admin');
 
   const loginView = document.getElementById('adminLogin');
   const dashView = document.getElementById('adminDashboard');
@@ -285,7 +285,7 @@ function adminLogout() {
 }
 
 function loadRegistrations() {
-  const registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
   renderRegistrations(registrations);
   updateStats(registrations);
 }
@@ -363,7 +363,7 @@ function updateStats(registrations) {
 
 function filterRegistrations() {
   const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  const registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
 
   if (!query) {
     renderRegistrations(registrations);
@@ -379,7 +379,7 @@ function filterRegistrations() {
 }
 
 function viewDetail(id) {
-  const registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
   const reg = registrations.find(r => r.id === id);
 
   if (!reg) return;
@@ -450,16 +450,16 @@ function closeDetailModal() {
 function deleteRegistration(id) {
   if (!confirm('Are you sure you want to delete this registration?')) return;
 
-  let registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+  let registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
   registrations = registrations.filter(r => r.id !== id);
-  localStorage.setItem('snarex_registrations', JSON.stringify(registrations));
+  localStorage.setItem('corsit_registrations', JSON.stringify(registrations));
 
   loadRegistrations();
   showToast('Registration deleted.', 'success');
 }
 
 function exportCSV() {
-  const registrations = JSON.parse(localStorage.getItem('snarex_registrations') || '[]');
+  const registrations = JSON.parse(localStorage.getItem('corsit_registrations') || '[]');
 
   if (registrations.length === 0) {
     showToast('No data to export.', 'error');
@@ -484,7 +484,7 @@ function exportCSV() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `snarex_registrations_${new Date().toISOString().split('T')[0]}.csv`;
+  a.download = `corsit_registrations_${new Date().toISOString().split('T')[0]}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 
